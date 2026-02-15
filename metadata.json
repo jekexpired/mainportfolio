@@ -1,0 +1,7 @@
+{
+  "name": "ProPhoto Portfolio & CMS",
+  "description": "A production-grade, bug-resistant photography portfolio with an integrated admin panel for content management.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
