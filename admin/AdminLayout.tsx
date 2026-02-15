@@ -10,12 +10,13 @@ import BackupManager from './BackupManager';
 import InstagramManager from './InstagramManager';
 import PageManager from './PageManager';
 import SecurityManager from './SecurityManager';
+import ClientManager from './ClientManager';
 import { Link, useNavigate } from 'react-router-dom';
 
 const AdminLayout: React.FC = () => {
   const { config, logout } = useConfig();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'gallery' | 'sections' | 'content' | 'pages' | 'instagram' | 'theme' | 'security' | 'maintenance'>('gallery');
+  const [activeTab, setActiveTab] = useState<'gallery' | 'sections' | 'content' | 'pages' | 'instagram' | 'theme' | 'security' | 'clients' | 'maintenance'>('gallery');
 
   const handleLogout = () => {
     logout();
@@ -39,6 +40,7 @@ const AdminLayout: React.FC = () => {
             { id: 'gallery', label: 'Portfolio Images' },
             { id: 'pages', label: 'Page Builder' },
             { id: 'sections', label: 'Site Layout' },
+            { id: 'clients', label: 'Clients & Brands' },
             { id: 'content', label: 'Copy & Actions' },
             { id: 'instagram', label: 'Instagram Feed' },
             { id: 'theme', label: 'Visual Styles' },
@@ -71,7 +73,7 @@ const AdminLayout: React.FC = () => {
         <div className="max-w-4xl mx-auto animate-fade-in">
           <header className="mb-10">
             <h2 className="text-3xl font-bold text-white mb-2">
-              {activeTab === 'pages' ? 'Page Builder' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1) + ' Management'}
+              {activeTab === 'pages' ? 'Page Builder' : activeTab.charAt(0).toUpperCase() + activeTab.slice(1).replace(/([A-Z])/g, ' $1') + ' Management'}
             </h2>
             <p className="text-zinc-500 text-sm">Update your public presence in real-time.</p>
           </header>
@@ -80,6 +82,7 @@ const AdminLayout: React.FC = () => {
             {activeTab === 'gallery' && <GalleryManager />}
             {activeTab === 'pages' && <PageManager />}
             {activeTab === 'sections' && <SectionManager />}
+            {activeTab === 'clients' && <ClientManager />}
             {activeTab === 'content' && <ContentManager />}
             {activeTab === 'instagram' && <InstagramManager />}
             {activeTab === 'theme' && <ThemeManager />}
